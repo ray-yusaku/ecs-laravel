@@ -1,0 +1,20 @@
+ecs-laravel:
+    build:
+      context: ./_buildfile/
+      args:
+        USER: yu-saku
+    container_name: ecs-laravel
+    ports:
+        - "80:80"
+        - "443:443"
+        - "2022:22"
+    volumes:
+        - /var/www/app:./app
+        - ./etc/httpd/conf/httpd.conf:/etc/httpd/conf/httpd.conf
+        - ./etc/httpd/conf.d/virtualhosts.conf:/etc/httpd/conf.d/virtualhosts.conf
+        - ./etc/httpd/conf.d/virtualhosts:/etc/httpd/conf.d/virtualhosts
+        - ./etc:/root/etc
+    tty: true
+    stdin_open: true
+    privileged: true
+    command: /sbin/init
